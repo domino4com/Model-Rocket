@@ -34,3 +34,4 @@
 # Other files
 .pio/
 .vscode/
+.DS_Store
