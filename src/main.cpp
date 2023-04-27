@@ -50,7 +50,7 @@ void loop() {
   }
 
   // Flight Step 2
-  if (buttons(1, check) || (RemoteXY.activity == 1 && RemoteXY.execute)) {
+  if (buttons(1, robot) || (RemoteXY.activity == 1 && RemoteXY.execute)) {
     if (!stateRead(Prepared)) {
       ESP_LOGE(LOGTAG, "Rocket not prepared - abort launch sequence");
       stateClear(Armed);  // Just in case
