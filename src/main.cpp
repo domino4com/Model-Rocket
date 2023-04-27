@@ -15,10 +15,13 @@ Download download;
 Preferences preferences;
 byte state;
 #include "utilities.h"
+#include "remote.h"
 
 void setup() {
   Serial.begin(115200);
   delay(1000);
+  RemoteXY_Init();
+  orig_esp_log = esp_log_set_vprintf(ble_log);
   ESP_LOGI(LOGTAG, "Rocket Firmware V1.0");
   print_wakeup_reason();
   CapTouchSetup();
@@ -32,19 +35,14 @@ void setup() {
   }
   ESP_LOGI(LOGTAG, "State: %s",
            String(std::bitset<8>(state).to_string().c_str()));
-  String status = "The rocket is ";
-  if (stateRead(Prepared)) status += "Prepared,";
-  if (stateRead(Armed)) status += "Armed,";
-  if (stateRead(Upright)) status += "Upright,";
-  if (stateRead(Completed)) status += "Completed,";
-  if (status.endsWith(",")) status.remove(status.length() - 1);
-  status += ".";
-  ESP_LOGI(LOGTAG, "%s", status.c_str());
 }
 
 void loop() {
+  RemoteXY_Handler();
+  log_state();
+
   // Preparing Step 1
-  if (buttons(2, left, right)) {
+  if (buttons(2, left, right) || (RemoteXY.activity == 0 && RemoteXY.execute)) {
     action(true);
     state = (byte)prepare.prepare();
     preferences.putBytes("state", &state, 1);
@@ -52,7 +50,7 @@ void loop() {
   }
 
   // Flight Step 2
-  if (buttons(1, robot) || stateRead(Armed)) {
+  if (buttons(1, check) || (RemoteXY.activity == 1 && RemoteXY.execute)) {
     if (!stateRead(Prepared)) {
       ESP_LOGE(LOGTAG, "Rocket not prepared - abort launch sequence");
       stateClear(Armed);  // Just in case
@@ -78,7 +76,7 @@ void loop() {
   }
 
   // Downloading Step 3
-  if (buttons(1, up)) {
+  if (buttons(1, up) || (RemoteXY.activity == 2 && RemoteXY.execute)) {
     if (!stateRead(Completed)) {
       ESP_LOGE(LOGTAG, "Flight not completed, no data - abort launch sequence");
     } else {
@@ -117,5 +115,6 @@ void loop() {
       SPIFFS.end();
     }
   }
+  RemoteXY.execute = 0;
   button = 0;
 }

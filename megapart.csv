@@ -7,8 +7,8 @@
 #spiffs,data,spiffs,0x3d0000,192K,
 
 # ESP-IDF Partition Table
-# Name, Type, SubType, Offset, Size, Flags
-nvs,data,nvs,0x9000,20K,
-otadata,data,ota,0xe000,8K,
-app0,app,ota_0,0x10000,0xF0000,
-spiffs,data,spiffs,0x100000,3M,
+# Name, Type,   SubType,    Offset,     Size,       Flags
+nvs,    data,   nvs,        0x009000,   0x005000,
+otadata,data,   ota,        0x00e000,   0x002000,
+app0,   app,    ota_0,      0x010000,   0x130000,
+spiffs, data,   spiffs,     0x140000,   0x2C0000,
