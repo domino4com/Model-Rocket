@@ -48,4 +48,11 @@ Firmware for Model Rocket
   - **102 002** actual records
   - Recorded time: 104 684 ms = **1 min, 44 sec**, (Will be less since the final buffer flushing will fail)
   - Download time with Ymodem: **~7 Min**
+
+# Analysis
+
+## Software
+Use the free [OpenRocket](http://openrocket.info/) software to analyse the flight data.
+There is a rocket configuration file in the `OpenRocket` folder, which matches the 3D printed rocket found in the `3D` folder.
+
   

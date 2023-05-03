@@ -33,6 +33,18 @@ def velocity(accel, time):
     accel_ms = accel * 9.80665
     return accel_ms * time
 
+# TODO: Replace above with below
+# def velocity(s, u, a, t):
+#     """
+#     Calculates velocity using the SUVAT equation v = u + at,
+#     where s is the displacement, u is the initial velocity, 
+#     a is the acceleration, and t is the time taken.
+#     """
+#     accel_ms = a * 9.80665
+#     v = u + accel_ms*t
+#     return v
+
+
 
 argParser = argparse.ArgumentParser(
     description="Converts Rocket Binary Data to CSV file!")
