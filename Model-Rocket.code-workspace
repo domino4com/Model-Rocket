@@ -56,5 +56,10 @@
 			"cinttypes": "cpp",
 			"typeinfo": "cpp"
 		}
+	},
+	"extensions": {
+		"recommendations": [
+			"bierner.github-markdown-preview"
+		]
 	}
 }
