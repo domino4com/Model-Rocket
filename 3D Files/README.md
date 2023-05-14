@@ -12,7 +12,7 @@ The rocket parts are designed to have **.35mm layers** and **1.5 width over thic
 Select Components. You will need a nosecone, body tube, fincan, and nosecone coupler. You can use multiple body tubes to make a longer rocket if desired. See below for recommended combinations.
 
 ### Step 2:
-Print parts. You may need to sand some mating surfaces or add tape for the correct fit.
+Print parts. These can be printed without raft. You may need to sand some mating surfaces or add tape for the correct fit.
 
 ### Step 3:
 Screw and glue nosecone to coupler.

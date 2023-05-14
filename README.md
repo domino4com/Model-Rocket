@@ -54,5 +54,3 @@ Firmware for Model Rocket
 ## Software
 Use the free [OpenRocket](http://openrocket.info/) software to analyse the flight data.
 There is a rocket configuration file in the `OpenRocket` folder, which matches the 3D printed rocket found in the `3D` folder.
-
-  
