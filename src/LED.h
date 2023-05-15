@@ -62,4 +62,10 @@ void tach(bool at) {
   }
 }
 
-
+void rec(bool on) {
+  if (on) {
+    digitalWrite(LEDpin[Middle], !LEDoff[Middle]);
+  } else {
+    digitalWrite(LEDpin[Middle], LEDoff[Middle]);
+  }
+}

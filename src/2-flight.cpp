@@ -111,8 +111,6 @@ void analayze_flight() {
 }
 
 bool Flight::flight() {
-  ESP_LOGI(LOGTAG, "Now waiting for takeoff");
-  // TODO
   unsigned long start = millis();
   while (true) {
     record.time = millis();

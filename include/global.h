@@ -5,6 +5,8 @@
 #define FILENAME "data.bin"
 #define FILEPATH "/" FILENAME
 
+enum States { Prepared, Armed, Upright, Completed };
+
 struct Record {
   unsigned long time;
   float accelX;

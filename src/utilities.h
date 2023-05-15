@@ -26,7 +26,7 @@ void print_wakeup_reason() {
   }
 }
 
-enum States { Prepared, Armed, Upright, Completed };
+
 
 void stateSet(int bit) {
   bitSet(state, bit);

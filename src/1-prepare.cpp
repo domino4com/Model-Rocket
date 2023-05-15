@@ -2,7 +2,7 @@
 #include <math.h>
 
 bool Prepare::prepare() {
-  ESP_LOGI(LOGTAG, "Preparation: Formatting storage - will take 34-35 seconds!");
+  ESP_LOGI(LOGTAG, "Preparation: Formatting storage - will take 34-35 seconds, but could tak 100-105 seconds!");
   unsigned long start = millis();
 
   if (!SPIFFS.begin(true)) {
@@ -20,5 +20,6 @@ bool Prepare::prepare() {
            SPIFFS.usedBytes());
   SPIFFS.end();
   ESP_LOGI(LOGTAG, "Preparation completed");
+  Serial.println("Preparation completed");
   return true;
 }

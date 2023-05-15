@@ -17,6 +17,7 @@ byte state;
 #include "utilities.h"
 #include "remote.h"
 
+
 void setup() {
   Serial.begin(115200);
   delay(1000);
@@ -35,6 +36,18 @@ void setup() {
   }
   ESP_LOGI(LOGTAG, "State: %s",
            String(std::bitset<8>(state).to_string().c_str()));
+  if (stateRead(Prepared)) {
+    ESP_LOGI(LOGTAG, "Rocket prepared");
+  }
+  if (stateRead(Armed)) {
+    ESP_LOGI(LOGTAG, "Rocket armed");
+  }
+  if (stateRead(Upright)) {
+    ESP_LOGI(LOGTAG, "Rocket upright");
+  }
+  if (stateRead(Completed)) {
+    ESP_LOGI(LOGTAG, "Rocket completed");
+  }
 }
 
 void loop() {
@@ -50,7 +63,8 @@ void loop() {
   }
 
   // Flight Step 2
-  if (buttons(1, robot) || (RemoteXY.activity == 1 && RemoteXY.execute)) {
+  if (buttons(1, check) || (RemoteXY.activity == 1 && RemoteXY.execute) ||
+      stateRead(Armed)) {
     if (!stateRead(Prepared)) {
       ESP_LOGE(LOGTAG, "Rocket not prepared - abort launch sequence");
       stateClear(Armed);  // Just in case
@@ -62,7 +76,9 @@ void loop() {
         stateClear(Armed);
         stateSet(Upright);
         tach(false);
+        rec(true);
         flight.flight();
+        rec(false);
         tach(true);
         stateClear(Prepared);
         stateSet(Completed);
